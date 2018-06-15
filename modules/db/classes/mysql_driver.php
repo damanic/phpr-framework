@@ -290,4 +290,34 @@ class MySQL_Driver extends Driver_Base
 			
 		return '`'.$name.'`';
 	}
+
+	public function escape($escape)
+	{
+		return mysql_real_escape_string($escape);
+	}
+
+	public function create_connection($host, $user, $password)
+	{
+		return @mysql_connect($host, $user, $password);
+	}
+
+	public function select_db($connection, $db)
+	{
+		return @mysql_select_db($db);
+	}
+
+	public function get_last_error_string()
+	{
+		return mysql_error();
+	}
+
+	public function close_connection($connection)
+	{
+		return @mysql_close($connection);
+	}
+
+	public function get_last_insert_id()
+	{
+		return mysql_insert_id();
+	}
 }

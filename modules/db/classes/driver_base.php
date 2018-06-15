@@ -92,4 +92,29 @@ class Driver_Base
 	{
 		return $name;
 	}
+
+	public function create_connection($host, $user, $password)
+	{
+		return null;
+	}
+
+	public function select_db($connection, $db)
+	{
+		return null;
+	}
+
+	public function get_last_error_string()
+	{
+		return null;
+	}
+
+	public function close_connection($connection)
+	{
+		return null;
+	}
+
+	public function get_last_insert_id()
+	{
+		return null;
+	}
 }

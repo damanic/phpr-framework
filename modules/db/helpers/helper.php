@@ -311,7 +311,7 @@ class Helper
 	// Internals
 	// 
 
-	protected static function driver()
+	public static function driver()
 	{
 		if (!self::$driver)
 		{
@@ -320,5 +320,10 @@ class Helper
 		}
 		
 		return self::$driver;
+	}
+
+	public static function escape($str)
+	{
+		return self::driver()->escape($str);
 	}
 }
