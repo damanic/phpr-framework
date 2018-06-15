@@ -1143,8 +1143,8 @@ class List_Behavior extends Controller_Behavior
 							continue;
 
 						$word = trim(mb_strtolower($word));
-						$word_queries[] = '%1$s like \'%2$s'.mysql_real_escape_string($word).'%2$s\'';
-						$word_queries_int[] = '%1$s = ((\''.mysql_real_escape_string($word).'\')+0)';
+						$word_queries[] = '%1$s like \'%2$s'.Db_Helper::escape($word).'%2$s\'';
+						$word_queries_int[] = '%1$s = ((\''.Db_Helper::escape($word).'\')+0)';
 					}
 
 					$field_queries = array();

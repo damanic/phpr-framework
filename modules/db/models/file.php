@@ -306,7 +306,7 @@ class File extends ActiveRecord
 		foreach ($item_ids as $index=>$id)
 		{
 			$order = $item_orders[$index];
-			Db_Helper::query('update '.$this->table_name.' set sort_order=:sort_order where id=:id', array(
+			Db_Helper::query('update '.self::table_name.' set sort_order=:sort_order where id=:id', array(
 				'sort_order' => $order,
 				'id' => $id
 			));

@@ -231,7 +231,7 @@ class Helper
 				continue;
 
 			$word = trim(mb_strtolower($word));
-			$word_queries[] = '%1$s LIKE \'%2$s'.mysql_real_escape_string($word).'%2$s\'';
+			$word_queries[] = '%1$s LIKE \'%2$s'.Db_Helper::escape($word).'%2$s\'';
 		}
 
 		$field_queries = array();

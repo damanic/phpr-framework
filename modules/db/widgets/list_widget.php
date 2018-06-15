@@ -5,6 +5,7 @@ use Phpr\Pagination;
 use Phpr\Inflector;
 use Phpr\SystemException;
 use Phpr\ApplicationException;
+use Db\Helper as Db_Helper;
 
 /*
 // Usage
@@ -789,8 +790,8 @@ class List_Widget extends Form_Widget_Base
 						continue;
 
 					$word = trim(mb_strtolower($word));
-					$word_queries[] = '%1$s like \'%2$s'.mysql_real_escape_string($word).'%2$s\'';
-					$word_queries_int[] = '%1$s = ((\''.mysql_real_escape_string($word).'\')+0)';
+					$word_queries[] = '%1$s like \'%2$s'.Db_Helper::escape($word).'%2$s\'';
+					$word_queries_int[] = '%1$s = ((\''.Db_Helper::escape($word).'\')+0)';
 				}
 
 				$field_queries = array();

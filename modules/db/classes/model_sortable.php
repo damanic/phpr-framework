@@ -45,7 +45,7 @@ class Model_Sortable extends Extension
 	
 	public function set_order_id()
 	{
-		$new_id = mysql_insert_id();
+		$new_id = Db_Helper::get_last_insert_id();
 		Db_Helper::query('update `'.$this->_model->table_name.'` set '.$this->_field_name.'=:new_id where id=:new_id', array(
 			'new_id'=>$new_id
 		));
