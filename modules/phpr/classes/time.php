@@ -1,6 +1,6 @@
 <?php namespace Phpr;
 
-use Phpr\String;
+use Phpr\Strings;
 use Phpr\ApplicationException;
 
 /**

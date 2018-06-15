@@ -2,7 +2,7 @@
 
 use DateTimeZone;
 
-use Phpr\String;
+use Phpr\Strings;
 use Phpr\ApplicationException;
 
 /**
@@ -850,9 +850,9 @@ class DateTime
 		$hours = $datetime->get_hours();
 		$minutes = $datetime->get_minutes();
 
-		$word_day = strlen($word_day > 1) ? String::word_form($days, $word_day) : $word_day;
-		$word_hour = strlen($word_hour > 1) ? String::word_form($days, $word_hour) : $word_hour;
-		$word_minute = strlen($word_minute > 1) ? String::word_form($days, $word_minute) : $word_minute;
+		$word_day = strlen($word_day > 1) ? Strings::word_form($days, $word_day) : $word_day;
+		$word_hour = strlen($word_hour > 1) ? Strings::word_form($days, $word_hour) : $word_hour;
+		$word_minute = strlen($word_minute > 1) ? Strings::word_form($days, $word_minute) : $word_minute;
 
 		$datetime_days = ($days > 0) ? $days . $word_day : "";
 		$datetime_hours = ($hours > 0) ? $hours . $word_hour : "";
@@ -910,29 +910,29 @@ class DateTime
 			$difference = $timestamp - $now;
 
 		if ($difference < 60)
-			return $difference . " " . String::word_form($difference, 'second');
+			return $difference . " " . Strings::word_form($difference, 'second');
 		else 
 		{
 			$difference = round($difference / 60);
 			
 			if ($difference < 60)
-				return $difference . " " . String::word_form($difference, 'minute');
+				return $difference . " " . Strings::word_form($difference, 'minute');
 			else
 			{
 				$difference = round($difference / 60);
 				
 				if ($difference < 24)
-					return $difference . " " . String::word_form($difference, 'hour');
+					return $difference . " " . Strings::word_form($difference, 'hour');
 				else
 				{
 					$difference = round($difference / 24);
 					
 					if ($difference < 7)
-						return $difference . " " . String::word_form($difference, 'day');
+						return $difference . " " . Strings::word_form($difference, 'day');
 					else
 					{
 						$difference = round($difference / 7);
-						return $difference . " " . String::word_form($difference, 'week');
+						return $difference . " " . Strings::word_form($difference, 'week');
 					}
 				}
 			}

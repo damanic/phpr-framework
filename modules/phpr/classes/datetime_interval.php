@@ -1,7 +1,7 @@
 <?php namespace Phpr;
 
 use Phpr;
-use Phpr\String;
+use Phpr\Strings;
 use Phpr\SystemException;
 
 /**
@@ -276,14 +276,14 @@ class DateTime_Interval
 		$interval_suffix = Phpr::$locale->get_string('phpr.dates', 'interval_suffix');
 
 		if ($mins < 60)
-			return $interval_prefix.' '.String::word_form($mins, $minute_str, true).' '.$interval_suffix;
+			return $interval_prefix.' '.Strings::word_form($mins, $minute_str, true).' '.$interval_suffix;
 
 		$hours = floor($this->get_hours_total());
 		if ($hours < 24)
-			return $interval_prefix.' '.String::word_form($hours, $hour_str, true).' '.$interval_suffix;
+			return $interval_prefix.' '.Strings::word_form($hours, $hour_str, true).' '.$interval_suffix;
 
 		$days = floor($this->get_days_total());
-		return String::word_form($days, $day_str, true);
+		return Strings::word_form($days, $day_str, true);
 	}
 
 	/**

@@ -1,7 +1,7 @@
 <?php namespace Db;
 
 use Phpr\Inflector;
-use Phpr\String;
+use Phpr\Strings;
 use Phpr\SystemException;
 use Db\Helper as Db_Helper;
 
@@ -219,7 +219,7 @@ class Helper
 		if (!is_array($fields))
 			$fields = array($fields);
 		
-		$words = String::split_to_words($query);
+		$words = Strings::split_to_words($query);
 
 		$word_queries = array();
 		foreach ($words as $word)

@@ -445,6 +445,7 @@ class List_Behavior extends Controller_Behavior
 		{
 			$row = $data_model;
 			$row->fill($row_data);
+			$row->eval_custom_columns();
 			
 			if ($filter_callback)
 			{

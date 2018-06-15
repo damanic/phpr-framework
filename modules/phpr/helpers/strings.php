@@ -8,7 +8,7 @@ use Phpr\Inflector;
  *
  * This class contains functions that may be useful for working with strings.
  */
-class String
+class Strings
 {
 	/**
 	 * Returns a single or plural form of a word

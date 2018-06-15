@@ -273,6 +273,7 @@ class Error_Log
 	
 	public static function encode_error_details($value) 
 	{
+		trace_log($value);
 		
 		$value = json_encode($value);
 

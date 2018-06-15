@@ -1,7 +1,7 @@
 <?php namespace Phpr;
 
 use Phpr;
-use Phpr\String;
+use Phpr\Strings;
 
 class Request
 {
@@ -294,8 +294,8 @@ class Request
 	public function is_admin() 
 	{
 		$request_param_name = Phpr::$config->get('REQUEST_PARAM_NAME', 'q');
-		$admin_url = '/' . String::normalize_uri(Phpr::$config->get('ADMIN_URL', 'admin'));
-		$current_url = '/' . String::normalize_uri(isset($_REQUEST[$request_param_name]) ? $_REQUEST[$request_param_name] : '');
+		$admin_url = '/' . Strings::normalize_uri(Phpr::$config->get('ADMIN_URL', 'admin'));
+		$current_url = '/' . Strings::normalize_uri(isset($_REQUEST[$request_param_name]) ? $_REQUEST[$request_param_name] : '');
 
 		return (stristr($current_url, $admin_url) !== false);
 	}
