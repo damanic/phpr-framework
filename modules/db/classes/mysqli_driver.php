@@ -27,10 +27,11 @@ class MySQLi_Driver extends Driver_Base
 		}
 
 		try {
-			Error_Log::$disable_db_logging = true;
 
 			// Load the configuration
 			parent::connect();
+
+			Error_Log::$disable_db_logging = true;
 
 			// Execute custom connection handlers
 			$external_connection = Phpr::$events->fire_event('phpr:on_before_database_connect', $this);
