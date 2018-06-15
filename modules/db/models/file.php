@@ -1,11 +1,11 @@
-<?php namespace Db;
+<?php
+namespace Db;
 
 use Phpr;
 use Phpr\SystemException;
 use Phpr\ApplicationException;
 use File\Image;
 use File\Upload;
-use Db\Helper as Db_Helper;
 
 class File extends ActiveRecord
 {
