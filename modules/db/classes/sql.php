@@ -5,7 +5,7 @@ use Phpr\Util;
 
 class Sql extends Sql_Where
 {
-	const default_driver = 'Db\MySQL_Driver';
+	const default_driver = 'Db\MySQLi_Driver';
 
 	protected $_driver = null;
 
