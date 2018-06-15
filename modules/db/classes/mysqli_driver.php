@@ -214,6 +214,35 @@ class MySQLi_Driver extends Driver_Base
 		}
 	}
 
+	/**
+	 * Returns the index descriptions for a table.
+	 * @return array
+	 */
+	public function describe_index($table)
+	{
+		$sql = 'SHOW INDEX FROM ' . $table;
+		Phpr::$trace_log->write($sql, 'SQL');
+		$result = $this->fetch_all($sql);
+		$result_array = array();
+		foreach ($result as $key => $val)
+		{
+			$key_name = $val['Key_name'];
+			if (array_key_exists($key_name, $result_array)) {
+				$result_array[$key_name]['columns'][] = $val['Column_name'];
+			} else {
+
+				$result_array[$key_name] = array(
+					'name'     => $key_name,
+					'columns'  => array($val['Column_name']),
+					'unique'   => (bool)($val['Non_unique'] != '1'),
+					'primary'  => (bool)($key_name == 'PRIMARY')
+				);
+			}
+		}
+
+		return $result_array;
+	}
+
 	/* Service routines */
 
 	protected function fetch_all($sql)
