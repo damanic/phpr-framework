@@ -1,5 +1,6 @@
 <?php namespace Phpr;
 
+use Phpr;
 use Phpr\DateTime;
 use Db\Helper as Db_Helper;
 
