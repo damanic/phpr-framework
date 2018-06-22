@@ -288,6 +288,10 @@ class Helper
 		return $column_value;
 	}
 
+	public static function get_last_insert_id(){
+		self::driver()->get_last_insert_id();
+	}
+
 	//
 	// Services
 	// 
