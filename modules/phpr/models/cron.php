@@ -87,17 +87,30 @@ class Cron
 	//   Phpr_Cron::queue_job('User_Model::static_method', array('param1', 'param2', 'param3'));
 	// Executes: 
 	//   User_Model::static_method('param1', 'param2', 'param3');
-	public static function queue_job($handler_name, $param_data=array())
+	public static function queue_job($handler_name, $param_data=array(), $retry_on_fail=false, $allow_duplicate = true)
 	{
 		$bind = array(
 			'handler_name' => $handler_name, 
 			'param_data' => serialize($param_data),
-			'now' => DateTime::now()->to_sql_datetime()
+			'now' => DateTime::now()->to_sql_datetime(),
+			'retry' => $retry_on_fail ? 1 : null,
 		);
-		Db_Helper::query('insert into phpr_cron_jobs (handler_name, param_data, created_at) values (:handler_name, :param_data, now())', $bind);
+		if(!$allow_duplicate){
+			$exists_id = Db_Helper::scalar("SELECT id FROM phpr_cron_jobs WHERE handler_name = :handler_name AND param_data = :param_data LIMIT 1", $bind);
+			if($exists_id){
+				$bind['id'] = $exists_id;
+				$sql = "UPDATE phpr_cron_jobs SET handler_name = :handler_name, param_data = :param_data WHERE id = :id";
+				$result = Db_Helper::query($sql, $bind);
+				if($result){
+					return;
+				}
+			}
+		}
+		$sql = 'insert into phpr_cron_jobs (handler_name, param_data, created_at, retry) values (:handler_name, :param_data, :now, :retry)';
+		Db_Helper::query($sql, $bind);
 	}
 
-	private static function execute_cronjobs()
+	public static function execute_cronjobs()
 	{
 		// Worker can perform only 5 jobs per run
 		// 
@@ -118,8 +131,13 @@ class Cron
 			
 			$method_name = $parts[1];
 
-			if (method_exists($model_class, $method_name))
-				call_user_func_array(array($model_class, $method_name), $params);
+			if (method_exists($model_class, $method_name)){
+				$result = call_user_func_array(array($model_class, $method_name), $params);
+				if($job->retry && !$result){
+					self::queue_job($job->handler_name, $params, $job->retry);
+				}
+			}
+
 		}
 	}
 

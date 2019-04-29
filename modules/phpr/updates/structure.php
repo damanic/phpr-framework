@@ -9,6 +9,7 @@ $table = Db_Structure::table('phpr_cron_jobs');
 	$table->column('handler_name', db_varchar, 100);
 	$table->column('param_data', db_text);
 	$table->column('created_at', db_datetime);
+	$table->column('retry', db_bool);
 
 $table = Db_Structure::table('phpr_user_params');
 	$table->primary_key('user_id')->set_default('0');
