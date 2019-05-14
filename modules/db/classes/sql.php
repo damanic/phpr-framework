@@ -308,7 +308,7 @@ class Sql extends Sql_Where
 		// Grouped by these columns
 		// 
 		if (isset($this->parts['group']) && count($this->parts['group']))
-			$sql[] = "GROUP BY\n\t" . implode('', $this->parts['group']);
+			$sql[] = "GROUP BY\n\t" . implode(', ', $this->parts['group']);
 
 		// Having these conditions
 		// 
